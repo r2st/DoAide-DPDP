@@ -13,3 +13,7 @@ keys/
 htmlcov/
 .DS_Store
 *.log
+
+# Environment
+.env*
+!.env.example
