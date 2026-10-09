@@ -15,6 +15,7 @@ import DSRHandler from './pages/DSRHandler'
 import ConsentWidget from './pages/ConsentWidget'
 import ComplianceChecklist from './pages/ComplianceChecklist'
 import DPDPExplainer from './pages/DPDPExplainer'
+import ReadinessAssessment from './pages/ReadinessAssessment'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/tools/dsr-handler" element={<DSRHandler />} />
         <Route path="/tools/consent-widget" element={<ConsentWidget />} />
         <Route path="/tools/compliance-checklist" element={<ComplianceChecklist />} />
+        <Route path="/tools/readiness-assessment" element={<ReadinessAssessment />} />
         <Route path="/dpdp-act" element={<DPDPExplainer />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />

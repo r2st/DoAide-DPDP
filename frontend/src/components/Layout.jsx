@@ -74,6 +74,7 @@ function Layout() {
             <div>
               <h4 style={{ marginBottom: '16px', fontSize: '14px' }}>Free Tools</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <Link to="/tools/readiness-assessment" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Readiness Assessment</Link>
                 <Link to="/tools/compliance-score" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Compliance Score</Link>
                 <Link to="/tools/privacy-policy" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Privacy Policy Generator</Link>
                 <Link to="/tools/consent-notice" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Consent Notice Builder</Link>

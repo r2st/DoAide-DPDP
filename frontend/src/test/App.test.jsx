@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { describe, it, expect } from 'vitest'
@@ -16,6 +17,7 @@ import DPAGenerator from '../pages/DPAGenerator'
 import DSRHandler from '../pages/DSRHandler'
 import ConsentWidget from '../pages/ConsentWidget'
 import DPDPExplainer from '../pages/DPDPExplainer'
+import ReadinessAssessment from '../pages/ReadinessAssessment'
 import { blogPosts } from '../pages/blogData'
 
 function renderWithRouter(ui, { route = '/' } = {}) {
@@ -73,12 +75,17 @@ describe('App routing', () => {
     renderWithRouter(<App />, { route: '/dpdp-act' })
     expect(screen.getAllByText(/DPDP Act/i).length).toBeGreaterThanOrEqual(1)
   })
+
+  it('renders readiness assessment at /tools/readiness-assessment', () => {
+    renderWithRouter(<App />, { route: '/tools/readiness-assessment' })
+    expect(screen.getByText(/DPDP Readiness Assessment/i)).toBeInTheDocument()
+  })
 })
 
 describe('Home page', () => {
   it('shows hero CTA', () => {
     renderWithRouter(<Home />)
-    expect(screen.getByText(/Check Your Compliance Score/i)).toBeInTheDocument()
+    expect(screen.getByText(/Take Free Readiness Assessment/i)).toBeInTheDocument()
   })
 
   it('shows deadline warning', () => {
@@ -89,20 +96,50 @@ describe('Home page', () => {
   it('shows stats', () => {
     renderWithRouter(<Home />)
     expect(screen.getAllByText(/80%/).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getByText(/₹250 Cr/)).toBeInTheDocument()
+    expect(screen.getAllByText(/₹250 Cr/).length).toBeGreaterThanOrEqual(1)
   })
 
   it('shows free tools section', () => {
     renderWithRouter(<Home />)
-    expect(screen.getByText(/Free Compliance Tools/i)).toBeInTheDocument()
+    expect(screen.getByText(/10 Free Compliance Tools/i)).toBeInTheDocument()
   })
 
-  it('lists all 9 tools', () => {
+  it('lists all 10 tools', () => {
     renderWithRouter(<Home />)
-    expect(screen.getByText(/Consent Widget Generator/i)).toBeInTheDocument()
-    expect(screen.getByText(/DPA Generator/i)).toBeInTheDocument()
-    expect(screen.getByText(/DSR Handler/i)).toBeInTheDocument()
-    expect(screen.getByText(/Compliance Checklist/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Consent Widget Generator/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/DPA Generator/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/DSR Handler/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Compliance Checklist/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Readiness Assessment/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('shows how it works section', () => {
+    renderWithRouter(<Home />)
+    expect(screen.getByText(/Get Compliant in 3 Steps/i)).toBeInTheDocument()
+  })
+
+  it('shows testimonials section', () => {
+    renderWithRouter(<Home />)
+    expect(screen.getByText(/Trusted by Indian Businesses/i)).toBeInTheDocument()
+  })
+
+  it('shows all testimonials', () => {
+    renderWithRouter(<Home />)
+    expect(screen.getByText(/Rajesh K./i)).toBeInTheDocument()
+    expect(screen.getByText(/Priya M./i)).toBeInTheDocument()
+    expect(screen.getByText(/Amit S./i)).toBeInTheDocument()
+    expect(screen.getByText(/Sneha D./i)).toBeInTheDocument()
+  })
+
+  it('shows final CTA', () => {
+    renderWithRouter(<Home />)
+    expect(screen.getByText(/Don't Wait Until the Deadline/i)).toBeInTheDocument()
+    expect(screen.getByText(/Take Free Assessment Now/i)).toBeInTheDocument()
+  })
+
+  it('shows no-login messaging', () => {
+    renderWithRouter(<Home />)
+    expect(screen.getByText(/No login required/i)).toBeInTheDocument()
   })
 })
 
@@ -121,6 +158,11 @@ describe('Tools page', () => {
     expect(screen.getByText(/Data Processing Agreement Generator/i)).toBeInTheDocument()
     expect(screen.getByText(/Data Subject Request Handler/i)).toBeInTheDocument()
     expect(screen.getByText(/Compliance Checklist/i)).toBeInTheDocument()
+  })
+
+  it('lists readiness assessment', () => {
+    renderWithRouter(<Tools />)
+    expect(screen.getByText(/DPDP Readiness Assessment/i)).toBeInTheDocument()
   })
 
   it('shows premium section', () => {
@@ -257,6 +299,85 @@ describe('DPDPExplainer page', () => {
   })
 })
 
+describe('ReadinessAssessment page', () => {
+  it('shows assessment title', () => {
+    renderWithRouter(<ReadinessAssessment />)
+    expect(screen.getByText(/DPDP Readiness Assessment/i)).toBeInTheDocument()
+  })
+
+  it('shows 2-minute messaging', () => {
+    renderWithRouter(<ReadinessAssessment />)
+    expect(screen.getByText(/Quick 2-minute checklist/i)).toBeInTheDocument()
+  })
+
+  it('shows all category headings', () => {
+    renderWithRouter(<ReadinessAssessment />)
+    expect(screen.getByText('Data Inventory')).toBeInTheDocument()
+    expect(screen.getByText('Consent')).toBeInTheDocument()
+    expect(screen.getByText('Privacy Policy')).toBeInTheDocument()
+    expect(screen.getByText('Data Rights')).toBeInTheDocument()
+    expect(screen.getByText('Security')).toBeInTheDocument()
+    expect(screen.getByText('Governance')).toBeInTheDocument()
+  })
+
+  it('shows 20 checklist items', () => {
+    renderWithRouter(<ReadinessAssessment />)
+    const checkboxes = screen.getAllByRole('checkbox')
+    expect(checkboxes).toHaveLength(20)
+  })
+
+  it('shows submit button with counter', () => {
+    renderWithRouter(<ReadinessAssessment />)
+    expect(screen.getByText(/Get My Readiness Score \(0\/20\)/i)).toBeInTheDocument()
+  })
+
+  it('updates counter when items are checked', async () => {
+    const user = userEvent.setup()
+    renderWithRouter(<ReadinessAssessment />)
+    const checkboxes = screen.getAllByRole('checkbox')
+    await user.click(checkboxes[0])
+    expect(screen.getByText(/1\/20 items checked/i)).toBeInTheDocument()
+    expect(screen.getByText(/Get My Readiness Score \(1\/20\)/i)).toBeInTheDocument()
+  })
+
+  it('shows results after submission', async () => {
+    const user = userEvent.setup()
+    renderWithRouter(<ReadinessAssessment />)
+    const submitBtn = screen.getByText(/Get My Readiness Score/i)
+    await user.click(submitBtn)
+    expect(screen.getByText(/Your DPDP Readiness Score/i)).toBeInTheDocument()
+    expect(screen.getByText(/Critical/i)).toBeInTheDocument()
+    expect(screen.getByText(/Breakdown by Area/i)).toBeInTheDocument()
+  })
+
+  it('shows perfect score when all items checked', async () => {
+    const user = userEvent.setup()
+    renderWithRouter(<ReadinessAssessment />)
+    const checkboxes = screen.getAllByRole('checkbox')
+    for (const cb of checkboxes) {
+      await user.click(cb)
+    }
+    const submitBtn = screen.getByText(/Get My Readiness Score \(20\/20\)/i)
+    await user.click(submitBtn)
+    expect(screen.getByText('100')).toBeInTheDocument()
+    expect(screen.getByText(/DPDP Ready/i)).toBeInTheDocument()
+  })
+
+  it('shows retake button in results', async () => {
+    const user = userEvent.setup()
+    renderWithRouter(<ReadinessAssessment />)
+    await user.click(screen.getByText(/Get My Readiness Score/i))
+    expect(screen.getByText(/Retake Assessment/i)).toBeInTheDocument()
+  })
+
+  it('shows areas to address when not all items checked', async () => {
+    const user = userEvent.setup()
+    renderWithRouter(<ReadinessAssessment />)
+    await user.click(screen.getByText(/Get My Readiness Score/i))
+    expect(screen.getByText(/Areas to Address/i)).toBeInTheDocument()
+  })
+})
+
 describe('Blog page', () => {
   it('shows all blog posts', () => {
     renderWithRouter(<Blog />)
@@ -284,8 +405,8 @@ describe('ShareButtons component', () => {
 })
 
 describe('Blog data', () => {
-  it('has 7 blog posts', () => {
-    expect(blogPosts).toHaveLength(7)
+  it('has 9 blog posts', () => {
+    expect(blogPosts).toHaveLength(9)
   })
 
   it('all posts have required fields', () => {
@@ -300,5 +421,13 @@ describe('Blog data', () => {
   it('all posts have unique slugs', () => {
     const slugs = blogPosts.map(p => p.slug)
     expect(new Set(slugs).size).toBe(slugs.length)
+  })
+
+  it('includes penalties enforcement post', () => {
+    expect(blogPosts.find(p => p.slug === 'dpdp-penalties-enforcement')).toBeTruthy()
+  })
+
+  it('includes startups guide post', () => {
+    expect(blogPosts.find(p => p.slug === 'dpdp-compliance-for-startups')).toBeTruthy()
   })
 })

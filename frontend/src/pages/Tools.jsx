@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
 const freeTools = [
+  { title: 'DPDP Readiness Assessment', desc: 'Quick 2-minute readiness checklist — no login required. Check items and get your instant readiness score.', path: '/tools/readiness-assessment' },
   { title: 'DPDP Compliance Score Calculator', desc: 'Answer 20 questions across 7 compliance areas and get an instant score with actionable recommendations.', path: '/tools/compliance-score' },
   { title: 'Compliance Checklist', desc: 'Track your organization\'s DPDP compliance progress across all requirements with this interactive checklist.', path: '/tools/compliance-checklist' },
   { title: 'Privacy Policy Generator', desc: 'Generate a DPDP Act-compliant privacy policy for your business. Download as HTML.', path: '/tools/privacy-policy' },
@@ -25,7 +26,7 @@ function Tools() {
     <>
       <Helmet>
         <title>Free DPDP Compliance Tools — DoAide DPDP</title>
-        <meta name="description" content="9 free tools for DPDP Act compliance: compliance score, privacy policy generator, consent builder, DPA generator, DSR handler, breach checklist, and more." />
+        <meta name="description" content="10 free tools for DPDP Act compliance: readiness assessment, compliance score, privacy policy generator, consent builder, DPA generator, DSR handler, breach checklist, and more." />
       </Helmet>
 
       <div className="container" style={{ padding: '48px 24px' }}>
