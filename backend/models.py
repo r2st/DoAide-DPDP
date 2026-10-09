@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Optional
 from pydantic import BaseModel, Field
 
 
@@ -82,6 +81,48 @@ class ComplianceScoreResponse(BaseModel):
     category: str
     breakdown: dict[str, dict]
     recommendations: list[str]
+
+
+class RequestType(str, Enum):
+    ACCESS = "access"
+    CORRECTION = "correction"
+    ERASURE = "erasure"
+    NOMINATION = "nomination"
+
+
+class DSRRequest(BaseModel):
+    organization_name: str = Field(min_length=1, max_length=200)
+    request_type: RequestType
+    data_principal_name: str = Field(min_length=1, max_length=200)
+    data_principal_email: str = Field(min_length=5)
+    request_details: str = Field(min_length=10)
+    dpo_name: str = Field(min_length=1, max_length=200)
+    dpo_email: str = Field(min_length=5)
+
+
+class DSRResponse(BaseModel):
+    organization_name: str
+    request_type: str
+    response_html: str
+    sla_days: int
+    generated_at: str
+
+
+class ConsentWidgetRequest(BaseModel):
+    organization_name: str = Field(min_length=1, max_length=200)
+    data_categories: list[str] = Field(min_length=1)
+    processing_purposes: list[str] = Field(min_length=1)
+    privacy_policy_url: str = Field(min_length=5)
+    theme: str = Field(default="dark", pattern=r"^(light|dark)$")
+    position: str = Field(default="bottom", pattern=r"^(bottom|center|top)$")
+    language: str = Field(default="en", pattern=r"^(en|hi)$")
+
+
+class ConsentWidgetResponse(BaseModel):
+    organization_name: str
+    widget_html: str
+    embed_script: str
+    generated_at: str
 
 
 class DPARequest(BaseModel):

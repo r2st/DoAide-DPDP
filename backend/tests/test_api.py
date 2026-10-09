@@ -71,6 +71,45 @@ async def test_generate_privacy_policy_with_children_data(client):
 
 
 @pytest.mark.anyio
+async def test_generate_privacy_policy_children_only(client):
+    payload = {
+        "business_name": "KidSafe",
+        "business_type": "edtech",
+        "data_categories": ["name", "age"],
+        "processing_purposes": ["education"],
+        "has_children_data": True,
+        "transfers_data_abroad": False,
+        "contact_email": "privacy@kidsafe.com",
+    }
+    response = await client.post("/api/v1/privacy-policy/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "Children" in data["policy_html"]
+    assert "Cross-Border" not in data["policy_html"]
+    assert "Children's Data" in data["sections"]
+    assert "Cross-Border Data Transfers" not in data["sections"]
+
+
+@pytest.mark.anyio
+async def test_generate_privacy_policy_cross_border_only(client):
+    payload = {
+        "business_name": "GlobalTech",
+        "business_type": "saas",
+        "data_categories": ["name", "email"],
+        "processing_purposes": ["service delivery"],
+        "has_children_data": False,
+        "transfers_data_abroad": True,
+        "contact_email": "privacy@globaltech.com",
+    }
+    response = await client.post("/api/v1/privacy-policy/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "Children" not in data["policy_html"]
+    assert "Cross-Border" in data["policy_html"]
+    assert "Cross-Border Data Transfers" in data["sections"]
+
+
+@pytest.mark.anyio
 async def test_generate_privacy_policy_invalid(client):
     payload = {
         "business_name": "",
@@ -149,6 +188,23 @@ async def test_generate_breach_report_high_severity(client):
     assert response.status_code == 200
     data = response.json()
     assert data["severity"] == "High"
+
+
+@pytest.mark.anyio
+async def test_generate_breach_report_medium_severity(client):
+    payload = {
+        "organization_name": "MidCorp",
+        "breach_date": "2026-10-05",
+        "discovery_date": "2026-10-06",
+        "data_affected": ["email addresses", "phone numbers"],
+        "individuals_affected": 5000,
+        "breach_description": "Employee accidentally exposed customer contact list via misconfigured cloud storage",
+        "remedial_actions": "Revoked public access, rotated credentials, notified affected users",
+    }
+    response = await client.post("/api/v1/breach-report/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["severity"] == "Medium"
 
 
 @pytest.mark.anyio
@@ -260,4 +316,219 @@ async def test_breach_report_invalid_individuals(client):
         "remedial_actions": "Test remedial actions taken",
     }
     response = await client.post("/api/v1/breach-report/generate", json=payload)
+    assert response.status_code == 422
+
+
+# DSR Handler Tests
+
+
+@pytest.mark.anyio
+async def test_generate_dsr_access(client):
+    payload = {
+        "organization_name": "DataCorp",
+        "request_type": "access",
+        "data_principal_name": "Rahul Sharma",
+        "data_principal_email": "rahul@example.com",
+        "request_details": "I want to know what personal data you hold about me and how it is being processed",
+        "dpo_name": "Priya Singh",
+        "dpo_email": "dpo@datacorp.com",
+    }
+    response = await client.post("/api/v1/dsr/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["organization_name"] == "DataCorp"
+    assert data["request_type"] == "access"
+    assert data["sla_days"] == 30
+    assert "Section 11" in data["response_html"]
+    assert "Rahul Sharma" in data["response_html"]
+    assert "dsr-response" in data["response_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_dsr_correction(client):
+    payload = {
+        "organization_name": "InfoTech Ltd",
+        "request_type": "correction",
+        "data_principal_name": "Anita Patel",
+        "data_principal_email": "anita@example.com",
+        "request_details": "My address on file is incorrect, please update to the new address I have provided",
+        "dpo_name": "Vikram Mehta",
+        "dpo_email": "dpo@infotech.com",
+    }
+    response = await client.post("/api/v1/dsr/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["request_type"] == "correction"
+    assert "Section 12" in data["response_html"]
+    assert "Correction" in data["response_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_dsr_erasure(client):
+    payload = {
+        "organization_name": "ShopKart",
+        "request_type": "erasure",
+        "data_principal_name": "Suresh Kumar",
+        "data_principal_email": "suresh@example.com",
+        "request_details": "I no longer use your service and want all my personal data to be permanently deleted",
+        "dpo_name": "Neha Gupta",
+        "dpo_email": "dpo@shopkart.com",
+    }
+    response = await client.post("/api/v1/dsr/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["request_type"] == "erasure"
+    assert "Section 12" in data["response_html"]
+    assert "Erasure" in data["response_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_dsr_nomination(client):
+    payload = {
+        "organization_name": "HealthPlus",
+        "request_type": "nomination",
+        "data_principal_name": "Meera Reddy",
+        "data_principal_email": "meera@example.com",
+        "request_details": "I wish to nominate my spouse Arun Reddy to exercise my data rights in case of my incapacity",
+        "dpo_name": "Dr. Rajan",
+        "dpo_email": "dpo@healthplus.com",
+    }
+    response = await client.post("/api/v1/dsr/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["request_type"] == "nomination"
+    assert "Section 14" in data["response_html"]
+    assert "Nomination" in data["response_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_dsr_invalid_empty_org(client):
+    payload = {
+        "organization_name": "",
+        "request_type": "access",
+        "data_principal_name": "Test User",
+        "data_principal_email": "test@example.com",
+        "request_details": "Test request details for validation testing",
+        "dpo_name": "DPO Name",
+        "dpo_email": "dpo@test.com",
+    }
+    response = await client.post("/api/v1/dsr/generate", json=payload)
+    assert response.status_code == 422
+
+
+@pytest.mark.anyio
+async def test_generate_dsr_invalid_request_type(client):
+    payload = {
+        "organization_name": "TestOrg",
+        "request_type": "invalid_type",
+        "data_principal_name": "Test User",
+        "data_principal_email": "test@example.com",
+        "request_details": "Test request details for validation testing",
+        "dpo_name": "DPO Name",
+        "dpo_email": "dpo@test.com",
+    }
+    response = await client.post("/api/v1/dsr/generate", json=payload)
+    assert response.status_code == 422
+
+
+# Consent Widget Tests
+
+
+@pytest.mark.anyio
+async def test_generate_consent_widget_dark(client):
+    payload = {
+        "organization_name": "WebCorp",
+        "data_categories": ["Name", "Email", "Location"],
+        "processing_purposes": ["Analytics", "Marketing"],
+        "privacy_policy_url": "https://webcorp.com/privacy",
+        "theme": "dark",
+        "position": "bottom",
+        "language": "en",
+    }
+    response = await client.post("/api/v1/consent-widget/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["organization_name"] == "WebCorp"
+    assert "dpdp-consent-banner" in data["widget_html"]
+    assert "Accept All" in data["widget_html"]
+    assert "Reject All" in data["widget_html"]
+    assert "Manage Preferences" in data["widget_html"]
+    assert len(data["embed_script"]) > 0
+
+
+@pytest.mark.anyio
+async def test_generate_consent_widget_light(client):
+    payload = {
+        "organization_name": "LightCorp",
+        "data_categories": ["Email"],
+        "processing_purposes": ["Service Delivery"],
+        "privacy_policy_url": "https://lightcorp.com/privacy",
+        "theme": "light",
+        "position": "center",
+        "language": "en",
+    }
+    response = await client.post("/api/v1/consent-widget/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "#ffffff" in data["widget_html"]
+    assert "center" in data["widget_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_consent_widget_hindi(client):
+    payload = {
+        "organization_name": "BharatTech",
+        "data_categories": ["Name", "Phone"],
+        "processing_purposes": ["Service"],
+        "privacy_policy_url": "https://bharattech.com/privacy",
+        "theme": "dark",
+        "position": "bottom",
+        "language": "hi",
+    }
+    response = await client.post("/api/v1/consent-widget/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "सहमति" in data["widget_html"]
+    assert "स्वीकार" in data["widget_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_consent_widget_top_position(client):
+    payload = {
+        "organization_name": "TopCorp",
+        "data_categories": ["Email"],
+        "processing_purposes": ["Analytics"],
+        "privacy_policy_url": "https://topcorp.com/privacy",
+        "theme": "dark",
+        "position": "top",
+        "language": "en",
+    }
+    response = await client.post("/api/v1/consent-widget/generate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "top:0" in data["widget_html"]
+
+
+@pytest.mark.anyio
+async def test_generate_consent_widget_invalid_empty_categories(client):
+    payload = {
+        "organization_name": "BadCorp",
+        "data_categories": [],
+        "processing_purposes": ["Analytics"],
+        "privacy_policy_url": "https://badcorp.com/privacy",
+    }
+    response = await client.post("/api/v1/consent-widget/generate", json=payload)
+    assert response.status_code == 422
+
+
+@pytest.mark.anyio
+async def test_generate_consent_widget_invalid_theme(client):
+    payload = {
+        "organization_name": "BadTheme",
+        "data_categories": ["Email"],
+        "processing_purposes": ["Analytics"],
+        "privacy_policy_url": "https://bad.com/privacy",
+        "theme": "purple",
+    }
+    response = await client.post("/api/v1/consent-widget/generate", json=payload)
     assert response.status_code == 422

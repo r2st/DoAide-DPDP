@@ -11,6 +11,11 @@ import Countdown from '../pages/Countdown'
 import Blog from '../pages/Blog'
 import Embed from '../pages/Embed'
 import ShareButtons from '../components/ShareButtons'
+import ComplianceChecklist from '../pages/ComplianceChecklist'
+import DPAGenerator from '../pages/DPAGenerator'
+import DSRHandler from '../pages/DSRHandler'
+import ConsentWidget from '../pages/ConsentWidget'
+import DPDPExplainer from '../pages/DPDPExplainer'
 import { blogPosts } from '../pages/blogData'
 
 function renderWithRouter(ui, { route = '/' } = {}) {
@@ -43,6 +48,31 @@ describe('App routing', () => {
     renderWithRouter(<App />, { route: '/blog' })
     expect(screen.getByText(/Expert guides/i)).toBeInTheDocument()
   })
+
+  it('renders DPA generator at /tools/dpa-generator', () => {
+    renderWithRouter(<App />, { route: '/tools/dpa-generator' })
+    expect(screen.getByText(/Data Processing Agreement/i)).toBeInTheDocument()
+  })
+
+  it('renders DSR handler at /tools/dsr-handler', () => {
+    renderWithRouter(<App />, { route: '/tools/dsr-handler' })
+    expect(screen.getByText(/Data Subject Request/i)).toBeInTheDocument()
+  })
+
+  it('renders consent widget at /tools/consent-widget', () => {
+    renderWithRouter(<App />, { route: '/tools/consent-widget' })
+    expect(screen.getByText(/Consent Widget Generator/i)).toBeInTheDocument()
+  })
+
+  it('renders compliance checklist at /tools/compliance-checklist', () => {
+    renderWithRouter(<App />, { route: '/tools/compliance-checklist' })
+    expect(screen.getAllByText(/Compliance Checklist/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('renders DPDP explainer at /dpdp-act', () => {
+    renderWithRouter(<App />, { route: '/dpdp-act' })
+    expect(screen.getAllByText(/DPDP Act/i).length).toBeGreaterThanOrEqual(1)
+  })
 })
 
 describe('Home page', () => {
@@ -66,6 +96,14 @@ describe('Home page', () => {
     renderWithRouter(<Home />)
     expect(screen.getByText(/Free Compliance Tools/i)).toBeInTheDocument()
   })
+
+  it('lists all 9 tools', () => {
+    renderWithRouter(<Home />)
+    expect(screen.getByText(/Consent Widget Generator/i)).toBeInTheDocument()
+    expect(screen.getByText(/DPA Generator/i)).toBeInTheDocument()
+    expect(screen.getByText(/DSR Handler/i)).toBeInTheDocument()
+    expect(screen.getByText(/Compliance Checklist/i)).toBeInTheDocument()
+  })
 })
 
 describe('Tools page', () => {
@@ -75,6 +113,14 @@ describe('Tools page', () => {
     expect(screen.getByText(/Privacy Policy Generator/i)).toBeInTheDocument()
     expect(screen.getByText(/Consent Notice Builder/i)).toBeInTheDocument()
     expect(screen.getByText(/Data Breach Response Checklist/i)).toBeInTheDocument()
+  })
+
+  it('lists new tools', () => {
+    renderWithRouter(<Tools />)
+    expect(screen.getByText(/Consent Widget Generator/i)).toBeInTheDocument()
+    expect(screen.getByText(/Data Processing Agreement Generator/i)).toBeInTheDocument()
+    expect(screen.getByText(/Data Subject Request Handler/i)).toBeInTheDocument()
+    expect(screen.getByText(/Compliance Checklist/i)).toBeInTheDocument()
   })
 
   it('shows premium section', () => {
@@ -121,6 +167,96 @@ describe('Countdown page', () => {
   })
 })
 
+describe('ComplianceChecklist page', () => {
+  it('shows checklist title', () => {
+    renderWithRouter(<ComplianceChecklist />)
+    expect(screen.getAllByText(/Compliance Checklist/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('shows section categories', () => {
+    renderWithRouter(<ComplianceChecklist />)
+    expect(screen.getAllByText(/Legal/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Consent/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Data Principal/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Security/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('shows overall progress', () => {
+    renderWithRouter(<ComplianceChecklist />)
+    expect(screen.getByText(/Overall Progress/i)).toBeInTheDocument()
+  })
+})
+
+describe('DPAGenerator page', () => {
+  it('shows form title', () => {
+    renderWithRouter(<DPAGenerator />)
+    expect(screen.getByText(/Data Processing Agreement/i)).toBeInTheDocument()
+  })
+
+  it('shows controller and processor fields', () => {
+    renderWithRouter(<DPAGenerator />)
+    expect(screen.getByText(/Controller.*Name/i)).toBeInTheDocument()
+    expect(screen.getByText(/Processor.*Name/i)).toBeInTheDocument()
+  })
+
+  it('shows generate button', () => {
+    renderWithRouter(<DPAGenerator />)
+    expect(screen.getByText(/Generate DPA/i)).toBeInTheDocument()
+  })
+})
+
+describe('DSRHandler page', () => {
+  it('shows form title', () => {
+    renderWithRouter(<DSRHandler />)
+    expect(screen.getByText(/Data Subject Request/i)).toBeInTheDocument()
+  })
+
+  it('shows request type selector', () => {
+    renderWithRouter(<DSRHandler />)
+    expect(screen.getByText(/Request Type/i)).toBeInTheDocument()
+  })
+
+  it('shows generate button', () => {
+    renderWithRouter(<DSRHandler />)
+    expect(screen.getByText(/Generate Response/i)).toBeInTheDocument()
+  })
+})
+
+describe('ConsentWidget page', () => {
+  it('shows form title', () => {
+    renderWithRouter(<ConsentWidget />)
+    expect(screen.getByText(/Consent Widget Generator/i)).toBeInTheDocument()
+  })
+
+  it('shows theme options', () => {
+    renderWithRouter(<ConsentWidget />)
+    expect(screen.getByText(/Theme/i)).toBeInTheDocument()
+  })
+
+  it('shows generate button', () => {
+    renderWithRouter(<ConsentWidget />)
+    expect(screen.getByText(/Generate Consent Widget/i)).toBeInTheDocument()
+  })
+})
+
+describe('DPDPExplainer page', () => {
+  it('shows main heading', () => {
+    renderWithRouter(<DPDPExplainer />)
+    expect(screen.getAllByText(/DPDP Act/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('shows key sections', () => {
+    renderWithRouter(<DPDPExplainer />)
+    expect(screen.getAllByText(/Lawful Processing/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Penalties/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('shows FAQ section', () => {
+    renderWithRouter(<DPDPExplainer />)
+    expect(screen.getAllByText(/Frequently Asked/i).length).toBeGreaterThanOrEqual(1)
+  })
+})
+
 describe('Blog page', () => {
   it('shows all blog posts', () => {
     renderWithRouter(<Blog />)
@@ -148,8 +284,8 @@ describe('ShareButtons component', () => {
 })
 
 describe('Blog data', () => {
-  it('has 3 blog posts', () => {
-    expect(blogPosts).toHaveLength(3)
+  it('has 7 blog posts', () => {
+    expect(blogPosts).toHaveLength(7)
   })
 
   it('all posts have required fields', () => {
@@ -159,5 +295,10 @@ describe('Blog data', () => {
       expect(post.content).toBeTruthy()
       expect(post.tags.length).toBeGreaterThan(0)
     })
+  })
+
+  it('all posts have unique slugs', () => {
+    const slugs = blogPosts.map(p => p.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
   })
 })

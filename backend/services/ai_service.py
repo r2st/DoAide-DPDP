@@ -4,15 +4,14 @@ from pathlib import Path
 import httpx
 
 
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-MODEL = "meta-llama/llama-3.2-3b-instruct:free"
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 
 def _get_api_key() -> str | None:
-    key = os.environ.get("OPENROUTER_API_KEY")
+    key = os.environ.get("GEMINI_API_KEY")
     if key:
         return key
-    key_file = Path(__file__).parent.parent.parent / "keys" / "openrouter.key"
+    key_file = Path(__file__).parent.parent.parent / "keys" / "gemini.key"
     if key_file.exists():
         return key_file.read_text().strip()
     return None
@@ -23,27 +22,27 @@ async def enhance_with_ai(prompt: str, system_prompt: str = "") -> str | None:
     if not api_key:
         return None
 
-    messages = []
+    contents = []
     if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
-    messages.append({"role": "user", "content": prompt})
+        contents.append({"role": "user", "parts": [{"text": system_prompt}]})
+        contents.append({"role": "model", "parts": [{"text": "Understood. I will follow these instructions."}]})
+    contents.append({"role": "user", "parts": [{"text": prompt}]})
 
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(
-                OPENROUTER_URL,
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json",
-                },
+                f"{GEMINI_URL}?key={api_key}",
+                headers={"Content-Type": "application/json"},
                 json={
-                    "model": MODEL,
-                    "messages": messages,
-                    "max_tokens": 2000,
+                    "contents": contents,
+                    "generationConfig": {
+                        "maxOutputTokens": 2000,
+                        "temperature": 0.7,
+                    },
                 },
             )
             response.raise_for_status()
             data = response.json()
-            return data["choices"][0]["message"]["content"]
+            return data["candidates"][0]["content"]["parts"][0]["text"]
     except Exception:
         return None

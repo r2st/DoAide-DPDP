@@ -10,6 +10,11 @@ import Countdown from './pages/Countdown'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Embed from './pages/Embed'
+import DPAGenerator from './pages/DPAGenerator'
+import DSRHandler from './pages/DSRHandler'
+import ConsentWidget from './pages/ConsentWidget'
+import ComplianceChecklist from './pages/ComplianceChecklist'
+import DPDPExplainer from './pages/DPDPExplainer'
 
 function App() {
   return (
@@ -22,6 +27,11 @@ function App() {
         <Route path="/tools/consent-notice" element={<ConsentNotice />} />
         <Route path="/tools/breach-checklist" element={<BreachChecklist />} />
         <Route path="/tools/countdown" element={<Countdown />} />
+        <Route path="/tools/dpa-generator" element={<DPAGenerator />} />
+        <Route path="/tools/dsr-handler" element={<DSRHandler />} />
+        <Route path="/tools/consent-widget" element={<ConsentWidget />} />
+        <Route path="/tools/compliance-checklist" element={<ComplianceChecklist />} />
+        <Route path="/dpdp-act" element={<DPDPExplainer />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/embed" element={<Embed />} />

@@ -3,8 +3,12 @@ import { Helmet } from 'react-helmet-async'
 
 const freeTools = [
   { title: 'DPDP Compliance Score Calculator', desc: 'Answer 20 questions across 7 compliance areas and get an instant score with actionable recommendations.', path: '/tools/compliance-score' },
+  { title: 'Compliance Checklist', desc: 'Track your organization\'s DPDP compliance progress across all requirements with this interactive checklist.', path: '/tools/compliance-checklist' },
   { title: 'Privacy Policy Generator', desc: 'Generate a DPDP Act-compliant privacy policy for your business. Download as HTML.', path: '/tools/privacy-policy' },
   { title: 'Consent Notice Builder', desc: 'Create DPDP-compliant consent notices with all required elements.', path: '/tools/consent-notice' },
+  { title: 'Consent Widget Generator', desc: 'Generate an embeddable DPDP-compliant consent banner with granular controls. Supports English and Hindi.', path: '/tools/consent-widget' },
+  { title: 'Data Processing Agreement Generator', desc: 'Generate DPDP-compliant data processing agreements between data fiduciaries and processors.', path: '/tools/dpa-generator' },
+  { title: 'Data Subject Request Handler', desc: 'Generate response templates for data access, correction, erasure, and nomination requests.', path: '/tools/dsr-handler' },
   { title: 'Data Breach Response Checklist', desc: 'Step-by-step checklist for the mandatory 72-hour breach notification process.', path: '/tools/breach-checklist' },
   { title: 'DPDP Deadline Countdown', desc: 'Visual countdown to the Nov 2026 and May 2027 DPDP Act deadlines.', path: '/tools/countdown' },
 ]
@@ -21,7 +25,7 @@ function Tools() {
     <>
       <Helmet>
         <title>Free DPDP Compliance Tools — DoAide DPDP</title>
-        <meta name="description" content="Free tools for DPDP Act compliance: compliance score calculator, privacy policy generator, consent notice builder, breach checklist, and deadline countdown." />
+        <meta name="description" content="9 free tools for DPDP Act compliance: compliance score, privacy policy generator, consent builder, DPA generator, DSR handler, breach checklist, and more." />
       </Helmet>
 
       <div className="container" style={{ padding: '48px 24px' }}>

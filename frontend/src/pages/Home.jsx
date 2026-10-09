@@ -4,8 +4,12 @@ import JsonLd from '../components/JsonLd'
 
 const tools = [
   { title: 'DPDP Compliance Score', desc: 'Answer 20 questions, get your instant compliance score', path: '/tools/compliance-score', badge: 'Free' },
+  { title: 'Compliance Checklist', desc: 'Track your DPDP compliance progress across all requirements', path: '/tools/compliance-checklist', badge: 'Free' },
   { title: 'Privacy Policy Generator', desc: 'Generate a DPDP-compliant privacy policy in minutes', path: '/tools/privacy-policy', badge: 'Free' },
   { title: 'Consent Notice Builder', desc: 'Build DPDP-compliant consent forms for your app', path: '/tools/consent-notice', badge: 'Free' },
+  { title: 'Consent Widget Generator', desc: 'Embeddable consent banner with granular controls', path: '/tools/consent-widget', badge: 'Free' },
+  { title: 'DPA Generator', desc: 'Data Processing Agreements for controllers and processors', path: '/tools/dpa-generator', badge: 'Free' },
+  { title: 'DSR Handler', desc: 'Response templates for data access, correction & erasure requests', path: '/tools/dsr-handler', badge: 'Free' },
   { title: 'Data Breach Checklist', desc: 'Step-by-step guide for 72-hour breach notification', path: '/tools/breach-checklist', badge: 'Free' },
   { title: 'Deadline Countdown', desc: 'Visual countdown to DPDP Act deadlines', path: '/tools/countdown', badge: 'Free' },
 ]
@@ -28,9 +32,10 @@ function Home() {
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
         name: 'DoAide DPDP',
-        description: 'India\'s DPDP Act compliance toolkit',
+        description: 'India\'s DPDP Act compliance toolkit with 9 free tools',
         applicationCategory: 'BusinessApplication',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+        url: 'https://dpdp.doaide.com',
       }} />
 
       <section style={{ padding: '80px 0 60px', textAlign: 'center' }}>

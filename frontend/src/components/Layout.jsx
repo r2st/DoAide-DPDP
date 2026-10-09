@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 const navLinks = [
   { path: '/', label: 'Home' },
   { path: '/tools', label: 'Free Tools' },
+  { path: '/dpdp-act', label: 'DPDP Act' },
   { path: '/blog', label: 'Blog' },
 ]
 
@@ -46,9 +47,9 @@ function Layout() {
                 {link.label}
               </Link>
             ))}
-            <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '14px' }}>
+            <Link to="/tools/compliance-score" className="btn-primary" style={{ padding: '8px 20px', fontSize: '14px' }}>
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -76,12 +77,16 @@ function Layout() {
                 <Link to="/tools/compliance-score" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Compliance Score</Link>
                 <Link to="/tools/privacy-policy" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Privacy Policy Generator</Link>
                 <Link to="/tools/consent-notice" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Consent Notice Builder</Link>
+                <Link to="/tools/dpa-generator" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>DPA Generator</Link>
+                <Link to="/tools/dsr-handler" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>DSR Handler</Link>
                 <Link to="/tools/breach-checklist" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Breach Checklist</Link>
               </div>
             </div>
             <div>
               <h4 style={{ marginBottom: '16px', fontSize: '14px' }}>Resources</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <Link to="/dpdp-act" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>DPDP Act Guide</Link>
+                <Link to="/tools/compliance-checklist" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Compliance Checklist</Link>
                 <Link to="/blog" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Blog</Link>
                 <Link to="/tools/countdown" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Deadline Countdown</Link>
                 <Link to="/embed" style={{ color: 'var(--text-muted)', fontSize: '14px' }}>Embed Widget</Link>

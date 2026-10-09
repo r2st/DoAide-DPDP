@@ -9,8 +9,12 @@ from models import (
     ComplianceScoreResponse,
     ConsentNoticeRequest,
     ConsentNoticeResponse,
+    ConsentWidgetRequest,
+    ConsentWidgetResponse,
     DPARequest,
     DPAResponse,
+    DSRRequest,
+    DSRResponse,
     PrivacyPolicyRequest,
     PrivacyPolicyResponse,
 )
@@ -19,6 +23,8 @@ from generators.consent_notice import generate_consent_notice
 from generators.breach_report import generate_breach_report
 from generators.compliance_score import calculate_score, get_questions
 from generators.dpa_generator import generate_dpa
+from generators.dsr_handler import generate_dsr_response
+from generators.consent_widget import generate_consent_widget
 from services.ai_service import enhance_with_ai
 
 app = FastAPI(
@@ -108,6 +114,32 @@ async def generate_dpa_endpoint(request: DPARequest):
         data_categories=request.data_categories,
         security_measures=request.security_measures,
         sub_processors=request.sub_processors,
+    )
+
+
+@app.post("/api/v1/dsr/generate", response_model=DSRResponse)
+async def generate_dsr_endpoint(request: DSRRequest):
+    return generate_dsr_response(
+        organization_name=request.organization_name,
+        request_type=request.request_type.value,
+        data_principal_name=request.data_principal_name,
+        data_principal_email=request.data_principal_email,
+        request_details=request.request_details,
+        dpo_name=request.dpo_name,
+        dpo_email=request.dpo_email,
+    )
+
+
+@app.post("/api/v1/consent-widget/generate", response_model=ConsentWidgetResponse)
+async def generate_consent_widget_endpoint(request: ConsentWidgetRequest):
+    return generate_consent_widget(
+        organization_name=request.organization_name,
+        data_categories=request.data_categories,
+        processing_purposes=request.processing_purposes,
+        privacy_policy_url=request.privacy_policy_url,
+        theme=request.theme,
+        position=request.position,
+        language=request.language,
     )
 
 
