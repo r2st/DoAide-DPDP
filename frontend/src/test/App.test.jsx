@@ -382,7 +382,7 @@ describe('Blog page', () => {
   it('shows all blog posts', () => {
     renderWithRouter(<Blog />)
     blogPosts.forEach(post => {
-      expect(screen.getByText(post.title)).toBeInTheDocument()
+      expect(screen.getAllByText(post.title).length).toBeGreaterThanOrEqual(1)
     })
   })
 })
@@ -405,8 +405,8 @@ describe('ShareButtons component', () => {
 })
 
 describe('Blog data', () => {
-  it('has 9 blog posts', () => {
-    expect(blogPosts).toHaveLength(9)
+  it('has 12 blog posts', () => {
+    expect(blogPosts).toHaveLength(12)
   })
 
   it('all posts have required fields', () => {

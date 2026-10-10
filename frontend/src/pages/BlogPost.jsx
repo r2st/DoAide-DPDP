@@ -92,6 +92,20 @@ function BlogPost() {
         author: { '@type': 'Organization', name: 'DoAide' },
         publisher: { '@type': 'Organization', name: 'DoAide' },
       }} />
+      {post.faqs && post.faqs.length > 0 && (
+        <JsonLd data={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: post.faqs.map(faq => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer,
+            },
+          })),
+        }} />
+      )}
 
       <div className="container" style={{ padding: '48px 24px', maxWidth: '800px' }}>
         <Link to="/blog" style={{ fontSize: '14px', color: 'var(--text-muted)', display: 'block', marginBottom: '24px' }}>
@@ -105,6 +119,18 @@ function BlogPost() {
           <h1 style={{ fontSize: '32px', fontWeight: 700, marginBottom: '12px', lineHeight: 1.3 }}>{post.title}</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '32px' }}>{post.date} · {post.readTime}</p>
           <div dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }} />
+
+          {post.faqs && post.faqs.length > 0 && (
+            <div style={{ marginTop: '40px', padding: '24px', background: 'var(--surface)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '20px' }}>Frequently Asked Questions</h2>
+              {post.faqs.map((faq, i) => (
+                <div key={i} style={{ marginBottom: i < post.faqs.length - 1 ? '20px' : 0, paddingBottom: i < post.faqs.length - 1 ? '20px' : 0, borderBottom: i < post.faqs.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '8px', color: 'var(--text-primary)' }}>{faq.question}</h3>
+                  <p style={{ fontSize: '14px', lineHeight: 1.7, color: 'var(--text-secondary)', margin: 0 }}>{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </article>
 
         <div style={{ marginTop: '40px', paddingTop: '24px', borderTop: '1px solid var(--border)' }}>
