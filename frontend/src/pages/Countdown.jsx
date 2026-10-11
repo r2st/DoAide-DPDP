@@ -36,7 +36,7 @@ function CountdownTimer({ deadline }) {
     minWidth: '80px',
   }
 
-  const urgencyColor = time.days < 90 ? 'var(--danger)' : time.days < 180 ? 'var(--warning)' : 'var(--gold)'
+  const urgencyColor = time.days < 90 ? 'var(--danger)' : time.days < 180 ? 'var(--warning)' : 'var(--da-teal)'
 
   return (
     <div className="card" style={{ padding: '32px', marginBottom: '24px' }}>
@@ -91,7 +91,7 @@ function Countdown() {
               { date: 'May 14, 2027', event: 'Core obligations take full effect' },
             ].map(m => (
               <div key={m.event} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-                <span style={{ fontSize: '13px', color: 'var(--gold)', fontWeight: 600, whiteSpace: 'nowrap', minWidth: '110px' }}>{m.date}</span>
+                <span style={{ fontSize: '13px', color: 'var(--da-teal)', fontWeight: 600, whiteSpace: 'nowrap', minWidth: '110px' }}>{m.date}</span>
                 <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>{m.event}</span>
               </div>
             ))}

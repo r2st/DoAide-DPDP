@@ -9,7 +9,7 @@ function Embed() {
   width="100%"
   height="700"
   frameborder="0"
-  style="border: 1px solid #2a2a2a; border-radius: 12px;"
+  style="border: 1px solid #e5e7eb; border-radius: 12px;"
   title="DPDP Compliance Score Calculator"
 ></iframe>`
 

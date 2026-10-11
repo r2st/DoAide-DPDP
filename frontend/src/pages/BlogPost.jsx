@@ -43,13 +43,13 @@ function renderMarkdown(content) {
       html.push(`<h3 style="font-size:18px;font-weight:600;margin:24px 0 8px">${trimmed.slice(4)}</h3>`)
     } else if (trimmed.startsWith('- ')) {
       if (!inList) { html.push('<ul style="margin:8px 0;padding-left:24px">'); inList = true }
-      const text = trimmed.slice(2).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:var(--gold)">$1</a>')
+      const text = trimmed.slice(2).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:var(--da-teal)">$1</a>')
       html.push(`<li style="margin:4px 0;font-size:14px;color:var(--text-secondary)">${text}</li>`)
     } else if (/^\d+\.\s/.test(trimmed)) {
-      const text = trimmed.replace(/^\d+\.\s/, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:var(--gold)">$1</a>')
+      const text = trimmed.replace(/^\d+\.\s/, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:var(--da-teal)">$1</a>')
       html.push(`<p style="margin:8px 0;padding-left:16px;font-size:14px;color:var(--text-secondary)"><strong>${trimmed.match(/^\d+/)[0]}.</strong> ${text}</p>`)
     } else {
-      const text = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:var(--gold)">$1</a>')
+      const text = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color:var(--da-teal)">$1</a>')
       html.push(`<p style="margin:8px 0;font-size:15px;line-height:1.7;color:var(--text-secondary)">${text}</p>`)
     }
   }

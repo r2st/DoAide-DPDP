@@ -75,7 +75,7 @@ function BreachChecklist() {
           <div style={{ background: 'var(--bg-secondary)', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
             <div style={{
               width: `${progress}%`, height: '100%', borderRadius: '4px',
-              background: progress === 100 ? 'var(--success)' : 'var(--gold)',
+              background: progress === 100 ? 'var(--success)' : 'var(--da-teal)',
               transition: 'width 0.3s',
             }} />
           </div>
@@ -83,7 +83,7 @@ function BreachChecklist() {
 
         {checklistItems.map(phase => (
           <div key={phase.phase} style={{ marginBottom: '32px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '16px', color: 'var(--gold)' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '16px', color: 'var(--da-teal)' }}>
               {phase.phase}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

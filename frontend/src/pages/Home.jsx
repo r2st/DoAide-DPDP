@@ -59,7 +59,7 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>DoAide DPDP — India's DPDP Act Compliance Toolkit</title>
+        <title>DoAide | DPDP — India's DPDP Act Compliance Toolkit</title>
         <meta name="description" content="Free tools to help Indian businesses comply with the Digital Personal Data Protection Act 2023. Check your compliance score, generate privacy policies, and more." />
       </Helmet>
       <JsonLd data={{
@@ -77,7 +77,7 @@ function Home() {
         <div className="container">
           <div style={{
             display: 'inline-block',
-            background: 'rgba(239, 68, 68, 0.15)',
+            background: 'rgba(239, 68, 68, 0.1)',
             color: 'var(--danger)',
             padding: '6px 16px',
             borderRadius: '20px',
@@ -88,7 +88,7 @@ function Home() {
             Nov 2026 deadline approaching. 80% of businesses aren't ready.
           </div>
           <h1 style={{ fontSize: '52px', fontWeight: 800, letterSpacing: '-1px', marginBottom: '20px', maxWidth: '800px', margin: '0 auto 20px' }}>
-            Is Your Business <span style={{ color: 'var(--gold)' }}>DPDP Ready</span>?
+            Is Your Business <span style={{ color: 'var(--da-teal)' }}>DPDP Ready</span>?
           </h1>
           <h2 style={{ fontSize: '52px', fontWeight: 800, letterSpacing: '-1px', marginBottom: '24px' }}>
             Find Out in <span style={{ color: 'var(--success)' }}>2 Minutes</span> — Free
@@ -117,7 +117,7 @@ function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px' }}>
             {stats.map(stat => (
               <div key={stat.label} className="card" style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', fontWeight: 800, color: 'var(--gold)', marginBottom: '8px' }}>{stat.value}</div>
+                <div style={{ fontSize: '32px', fontWeight: 800, color: 'var(--da-teal)', marginBottom: '8px' }}>{stat.value}</div>
                 <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>{stat.label}</div>
               </div>
             ))}
@@ -138,8 +138,8 @@ function Home() {
             {steps.map(step => (
               <div key={step.num} className="card" style={{ textAlign: 'center', padding: '32px 24px' }}>
                 <div style={{
-                  width: '48px', height: '48px', borderRadius: '50%', background: 'var(--gold)',
-                  color: '#000', fontSize: '20px', fontWeight: 800,
+                  width: '48px', height: '48px', borderRadius: '50%', background: 'var(--da-teal)',
+                  color: '#fff', fontSize: '20px', fontWeight: 800,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   margin: '0 auto 16px',
                 }}>
@@ -188,7 +188,7 @@ function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {testimonials.map(t => (
               <div key={t.author} className="card" style={{ padding: '28px' }}>
-                <div style={{ fontSize: '24px', color: 'var(--gold)', marginBottom: '12px' }}>&ldquo;</div>
+                <div style={{ fontSize: '24px', color: 'var(--da-teal)', marginBottom: '12px' }}>&ldquo;</div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '14px', lineHeight: 1.7, marginBottom: '20px', fontStyle: 'italic' }}>
                   {t.quote}
                 </p>

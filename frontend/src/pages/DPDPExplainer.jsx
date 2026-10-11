@@ -101,15 +101,15 @@ function DPDPExplainer() {
                 <h4 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '12px' }}>Key Dates</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <div style={{ display: 'flex', gap: '12px' }}>
-                    <span style={{ color: 'var(--gold)', fontWeight: 600, fontSize: '13px', minWidth: '110px' }}>Aug 11, 2023</span>
+                    <span style={{ color: 'var(--da-teal)', fontWeight: 600, fontSize: '13px', minWidth: '110px' }}>Aug 11, 2023</span>
                     <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Presidential assent received</span>
                   </div>
                   <div style={{ display: 'flex', gap: '12px' }}>
-                    <span style={{ color: 'var(--gold)', fontWeight: 600, fontSize: '13px', minWidth: '110px' }}>Nov 14, 2026</span>
+                    <span style={{ color: 'var(--da-teal)', fontWeight: 600, fontSize: '13px', minWidth: '110px' }}>Nov 14, 2026</span>
                     <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Consent Manager registration deadline</span>
                   </div>
                   <div style={{ display: 'flex', gap: '12px' }}>
-                    <span style={{ color: 'var(--gold)', fontWeight: 600, fontSize: '13px', minWidth: '110px' }}>May 14, 2027</span>
+                    <span style={{ color: 'var(--da-teal)', fontWeight: 600, fontSize: '13px', minWidth: '110px' }}>May 14, 2027</span>
                     <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Core obligations take full effect</span>
                   </div>
                 </div>
@@ -162,8 +162,8 @@ function DPDPExplainer() {
                 Critically, <strong>withdrawal of consent must be as easy as giving consent</strong>. If consent is obtained
                 via a single click, withdrawal should also be a single click — not a multi-step email process.
               </p>
-              <div className="card" style={{ padding: '16px', background: 'rgba(240, 180, 41, 0.08)', border: '1px solid var(--gold)' }}>
-                <p style={{ fontSize: '13px', color: 'var(--gold)' }}>
+              <div className="card" style={{ padding: '16px', background: 'var(--da-teal-light)', border: '1px solid var(--da-teal)' }}>
+                <p style={{ fontSize: '13px', color: 'var(--da-teal)' }}>
                   Build compliant consent notices with our <Link to="/tools/consent-notice" style={{ fontWeight: 600 }}>Consent Notice Builder</Link> or
                   generate an embeddable banner with our <Link to="/tools/consent-widget" style={{ fontWeight: 600 }}>Consent Widget Generator</Link>.
                 </p>
@@ -245,8 +245,8 @@ function DPDPExplainer() {
                 <li style={liStyle}><strong>Right to Grievance Redressal (Section 13):</strong> Every Data Fiduciary must have a mechanism to address grievances. If unsatisfied, the Data Principal can approach the Data Protection Board</li>
                 <li style={liStyle}><strong>Right to Nominate (Section 14):</strong> Nominate another individual to exercise these rights in the event of death or incapacity</li>
               </ul>
-              <div className="card" style={{ padding: '16px', background: 'rgba(240, 180, 41, 0.08)', border: '1px solid var(--gold)' }}>
-                <p style={{ fontSize: '13px', color: 'var(--gold)' }}>
+              <div className="card" style={{ padding: '16px', background: 'var(--da-teal-light)', border: '1px solid var(--da-teal)' }}>
+                <p style={{ fontSize: '13px', color: 'var(--da-teal)' }}>
                   Generate compliant response templates for all request types with our <Link to="/tools/dsr-handler" style={{ fontWeight: 600 }}>Data Subject Request Handler</Link>.
                 </p>
               </div>

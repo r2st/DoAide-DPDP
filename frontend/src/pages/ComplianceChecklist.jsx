@@ -127,7 +127,7 @@ function ComplianceChecklist() {
           <div style={{ background: 'var(--bg-secondary)', borderRadius: '4px', height: '10px', overflow: 'hidden' }}>
             <div style={{
               width: `${progress}%`, height: '100%', borderRadius: '4px',
-              background: progress === 100 ? 'var(--success)' : progress >= 60 ? 'var(--gold)' : 'var(--warning)',
+              background: progress === 100 ? 'var(--success)' : progress >= 60 ? 'var(--da-teal)' : 'var(--warning)',
               transition: 'width 0.3s',
             }} />
           </div>
@@ -138,7 +138,7 @@ function ComplianceChecklist() {
             const pct = getSectionProgress(section)
             return (
               <div key={section.title} className="card" style={{ padding: '16px', textAlign: 'center' }}>
-                <div style={{ fontSize: '24px', fontWeight: 700, color: pct === 100 ? 'var(--success)' : pct >= 50 ? 'var(--gold)' : 'var(--warning)' }}>
+                <div style={{ fontSize: '24px', fontWeight: 700, color: pct === 100 ? 'var(--success)' : pct >= 50 ? 'var(--da-teal)' : 'var(--warning)' }}>
                   {pct}%
                 </div>
                 <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>{section.title}</div>
@@ -150,7 +150,7 @@ function ComplianceChecklist() {
         {checklistSections.map(section => (
           <div key={section.title} style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--gold)' }}>{section.title}</h3>
+              <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--da-teal)' }}>{section.title}</h3>
               <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                 {section.items.filter(i => checked[i.id]).length}/{section.items.length}
               </span>

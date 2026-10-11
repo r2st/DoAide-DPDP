@@ -158,7 +158,7 @@ function ReadinessAssessment() {
 
         {categories.map(cat => (
           <div key={cat} style={{ marginBottom: '32px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px', color: 'var(--gold)' }}>{cat}</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px', color: 'var(--da-teal)' }}>{cat}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {checklist.filter(i => i.category === cat).map(item => (
                 <label
