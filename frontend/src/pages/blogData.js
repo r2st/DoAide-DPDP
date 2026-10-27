@@ -1,6 +1,7 @@
 export const blogPosts = [
   {
     slug: 'dpdp-act-complete-guide',
+    published: '2026-10-04', // first commit; `date` is the display label
     title: 'DPDP Act 2023: Complete Guide for Indian Businesses',
     excerpt: 'Everything you need to know about India\'s Digital Personal Data Protection Act — key provisions, compliance requirements, deadlines, and penalties.',
     date: 'October 1, 2026',
@@ -77,6 +78,7 @@ The DPDP Act represents a significant shift in how Indian businesses handle pers
   },
   {
     slug: 'create-dpdp-compliant-privacy-policy',
+    published: '2026-10-04', // first commit; `date` is the display label
     title: 'How to Create a DPDP-Compliant Privacy Policy',
     excerpt: 'Step-by-step guide to creating a privacy policy that meets all DPDP Act requirements — with free templates and a generator tool.',
     date: 'September 25, 2026',
@@ -164,6 +166,7 @@ Don't start from scratch. Use our [free Privacy Policy Generator](/tools/privacy
   },
   {
     slug: '5-steps-dpdp-compliance',
+    published: '2026-10-04', // first commit; `date` is the display label
     title: '5 Steps to Prepare for DPDP Compliance Before Nov 2026',
     excerpt: 'A practical action plan for businesses to achieve DPDP compliance before the November 2026 deadline. Start today.',
     date: 'September 20, 2026',
@@ -278,6 +281,7 @@ The businesses that start now will have a smooth transition. Those that wait unt
   },
   {
     slug: 'data-fiduciary-obligations',
+    published: '2026-10-09', // first commit; `date` is the display label
     title: 'Understanding Data Fiduciary Obligations Under DPDP Act',
     excerpt: 'What is a Data Fiduciary, what are your obligations, and what penalties do you face for non-compliance? A practical guide for Indian businesses.',
     date: 'October 5, 2026',
@@ -339,6 +343,7 @@ Don't wait for enforcement — start building your compliance framework today.
   },
   {
     slug: 'dpdp-vs-gdpr',
+    published: '2026-10-09', // first commit; `date` is the display label
     title: 'DPDP Act vs GDPR: Key Differences Indian Businesses Should Know',
     excerpt: 'How does India\'s DPDP Act compare to Europe\'s GDPR? Understand the key differences in scope, consent, penalties, and data transfers.',
     date: 'October 3, 2026',
@@ -416,6 +421,7 @@ Use our [Compliance Score Calculator](/tools/compliance-score) to assess your DP
   },
   {
     slug: 'handling-data-subject-requests',
+    published: '2026-10-09', // first commit; `date` is the display label
     title: 'How to Handle Data Subject Requests Under DPDP Act',
     excerpt: 'A practical guide to processing data access, correction, erasure, and nomination requests from Data Principals under the DPDP Act.',
     date: 'October 7, 2026',
@@ -492,6 +498,7 @@ Combined with our [Compliance Checklist](/tools/compliance-checklist), you can e
   },
   {
     slug: 'consent-management-guide',
+    published: '2026-10-09', // first commit; `date` is the display label
     title: 'Consent Management Under DPDP Act: A Complete Guide',
     excerpt: 'Everything you need to know about collecting, managing, and withdrawing consent under India\'s DPDP Act — with practical implementation tips.',
     date: 'October 9, 2026',
@@ -586,6 +593,7 @@ Starting your consent management implementation now ensures you're ready well be
   },
   {
     slug: 'dpdp-penalties-enforcement',
+    published: '2026-10-10', // first commit; `date` is the display label
     title: 'DPDP Act Penalties & Enforcement: What Every Business Must Know',
     excerpt: 'A breakdown of the penalty structure under the DPDP Act 2023 — from ₹50 Crore to ₹250 Crore — and how the Data Protection Board will enforce it.',
     date: 'October 10, 2026',
@@ -681,7 +689,8 @@ The businesses that invest in compliance now will avoid not just penalties, but 
   },
   {
     slug: 'dpdp-act-2023-business-guide',
-    title: 'DPDP Act 2023: Complete Guide for Indian Businesses',
+    published: '2026-10-10', // first commit; `date` is the display label
+    title: 'DPDP Act Compliance Handbook: Scope, Consent, Transfers & Penalties',
     excerpt: 'A comprehensive guide to the Digital Personal Data Protection Act 2023 — covering scope, applicability, consent framework, cross-border transfers, penalties, and step-by-step compliance strategies for Indian businesses of all sizes.',
     date: 'October 10, 2026',
     readTime: '14 min read',
@@ -845,6 +854,7 @@ The DPDP Act is not a future concern — it is a present reality. The businesses
   },
   {
     slug: 'dpo-under-dpdp-roles-responsibilities',
+    published: '2026-10-10', // first commit; `date` is the display label
     title: 'Data Protection Officer (DPO) Under DPDP: Roles, Responsibilities, and Appointment',
     excerpt: 'Everything you need to know about the Data Protection Officer role under the DPDP Act 2023 — who needs one, qualifications, duties, appointment process, and how a DPO fits into your compliance framework.',
     date: 'October 10, 2026',
@@ -1039,6 +1049,7 @@ The DPO — whether mandatory or voluntary — is the person who ties all of the
   },
   {
     slug: 'consent-management-collect-manage',
+    published: '2026-10-10', // first commit; `date` is the display label
     title: 'Consent Management Under DPDP Act: How to Collect and Manage User Consent',
     excerpt: 'A practical implementation guide for collecting, storing, tracking, and withdrawing user consent under the DPDP Act 2023 — with technical patterns, UI best practices, and free tools.',
     date: 'October 10, 2026',
@@ -1248,6 +1259,7 @@ Consent management is the single most important compliance activity under the DP
   },
   {
     slug: 'dpdp-compliance-for-startups',
+    published: '2026-10-10', // first commit; `date` is the display label
     title: 'DPDP Compliance for Startups: A Practical No-Nonsense Guide',
     excerpt: 'A lean, practical guide for Indian startups to achieve DPDP compliance without breaking the bank or hiring a full legal team.',
     date: 'October 8, 2026',

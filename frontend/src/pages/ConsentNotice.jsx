@@ -73,7 +73,7 @@ function ConsentNotice() {
     <>
       <Helmet>
         <title>Consent Notice Builder — DoAide DPDP</title>
-        <meta name="description" content="Build DPDP-compliant consent notices for your application. Free drag-and-drop builder." />
+        <meta name="description" content="Build DPDP-compliant consent notices for your application: pick the data you collect and its purposes, and get notice text to use. Free." />
       </Helmet>
       <div className="container" style={{ padding: '48px 24px', maxWidth: '700px' }}>
         <h1 style={{ fontSize: '28px', fontWeight: 700, marginBottom: '8px' }}>Consent Notice Builder</h1>
